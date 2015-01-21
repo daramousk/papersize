@@ -1,0 +1,17 @@
+TODO description
+
+Install
+=======
+
+TODO python python3
+
+TODO pip TODO virtualenv
+
+  python3 setup.py install
+
+Documentation
+=============
+
+You can build the documentation using:
+
+  cd doc && make html

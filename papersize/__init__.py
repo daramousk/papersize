@@ -1,4 +1,4 @@
-# Copyright Louis Paternault 2011-2014
+# Copyright Louis Paternault 2015
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 1
 
-"""Paper-size related functions"""
+"""Paper-size related data and functions"""
 
 import decimal
 import os
@@ -20,6 +20,10 @@ import re
 import subprocess
 
 from pdfautonup import errors
+
+VERSION = "0.0.0"
+__AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
+__COPYRIGHT__ = "(C) 2015 Louis Paternault. GNU GPL 3 or later."
 
 PAPERSIZES = {
     # http://www.printernational.org/iso-paper-sizes.php
@@ -211,3 +215,12 @@ def target_paper_size(target_size):
 
     # Eventually, if everything else has failed, a4
     return parse_paper_size('a4')
+
+def isPortrait (or is_portrait):
+    TODO
+
+def isLandscape():
+    TODO
+
+def rotate(size, portrait=True):
+    TODO
