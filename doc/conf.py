@@ -59,8 +59,8 @@ copyright = '2015, Louis Paternault'
 # built documents.
 #
 # The short X.Y version.
-from papersize import VERSION
-version = VERSION
+from papersize import __version__
+version = __version__
 # The full version, including alpha/beta/rc tags.
 release = version
 

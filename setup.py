@@ -18,7 +18,7 @@
 from setuptools import setup, find_packages
 import os
 
-from papersize import VERSION
+from papersize import __version__
 
 def readme():
     directory = os.path.dirname(os.path.join(
@@ -29,7 +29,7 @@ def readme():
 
 setup(
         name='Papersize',
-        version=VERSION,
+        version=__version__,
         packages=find_packages(),
         setup_requires=["hgtools"],
         install_requires=[

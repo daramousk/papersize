@@ -19,10 +19,9 @@ import os
 import re
 import subprocess
 
-VERSION = "0.0.0"
+__version__ = "0.0.0"
 __AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
 __COPYRIGHT__ = "(C) 2015 Louis Paternault. GNU GPL 3 or later."
-# TODO Hide every private variable
 
 SIZES = {
     # http://www.printernational.org/iso-paper-sizes.php
@@ -72,7 +71,7 @@ SIZES = {
     "ledger": "17in x 11in",
 
     # http://simple.wikipedia.org/wiki/Paper_size
-    "quarto": "8in x 10in",
+    "quarto": "9in x 11in",
 
     # http://hplipopensource.com/hplip-web/tech_docs/page_sizes.html
     "flsa": "8.5in x 13in",
@@ -88,28 +87,32 @@ SIZES = {
     }
 
 # Source: http://en.wikibooks.org/wiki/LaTeX/Lengths
-UNITS = {
-    "": 1, # Default is point (pt)
-    "pt": 1,
-    "mm": 2.84,
-    "cm": 28.4,
-    "in": 72.27,
-    "bp": 1.00375,
-    "pc": 12,
-    "dd": 1.07,
-    "cc": 12.84,
-    "sp": 0.000015,
+_TXT_UNITS = {
+    "": "1", # Default is point (pt)
+    "pt": "1",
+    "mm": "2.845275591",
+    "cm": "28.45275591",
+    "in": "72.27",
+    "bp": "1.00375",
+    "pc": "12",
+    "dd": "1.07",
+    "cc": "12.84",
+    "sp": "0.000015",
     }
+UNITS = dict([
+    (key, Decimal(value))
+    for (key, value)
+    in _TXT_UNITS.items()
+    ])
 
-UNITS_RE = r"({})".format("|".join(UNITS.keys()))
-SIZE_RE = r"([\d.]+){}".format(UNITS_RE)
-PAPERSIZE_RE = r"^(?P<width>{size}) *[x× ]? *(?P<height>{size})$".format(
-    size=SIZE_RE
+__UNITS_RE = r"({})".format("|".join(UNITS.keys()))
+__SIZE_RE = r"([\d.]+){}".format(__UNITS_RE)
+__PAPERSIZE_RE = r"^(?P<width>{size}) *[x× ]? *(?P<height>{size})$".format(
+    size=__SIZE_RE
     )
 
-UNITS_COMPILED_RE = re.compile("^{}$".format(UNITS_RE))
-SIZE_COMPILED_RE = re.compile("^{}$".format(SIZE_RE).format("size"))
-PAPERSIZE_COMPILED_RE = re.compile(PAPERSIZE_RE.format("width", "height"))
+__SIZE_COMPILED_RE = re.compile("^{}$".format(__SIZE_RE).format("size"))
+__PAPERSIZE_COMPILED_RE = re.compile(__PAPERSIZE_RE.format("width", "height"))
 
 class PapersizeException(Exception):
     """All exceptions of this module inherit from this one."""
@@ -119,7 +122,9 @@ class CouldNotParse(PapersizeException):
     pass
 
 def convert_length(length, orig, dest):
-    """TODO"""
+    """TODO
+
+    """
     return (Decimal(UNITS[orig]) * length) / Decimal(UNITS[dest])
 
 def parse_length(string, unit="pt"):
@@ -127,45 +132,93 @@ def parse_length(string, unit="pt"):
 
     :return: The length, in points.
     :rtype: :class:`decimal.Decimal`
+
+    >>> float(parse_length("1cm", "mm"))
+    10.0
+    >>> float(parse_length("10cm"))
+    284.5275591
     """
     # TODO return value in the specified unit
-    match = SIZE_COMPILED_RE.match(string).groups()
-    return Decimal(match[0]) * Decimal(UNITS[match[1]])
+    match = __SIZE_COMPILED_RE.match(string).groups()
+    return convert_length(
+        Decimal(match[0]),
+        match[1],
+        unit,
+        )
 
-def parse_couple(string):
+def parse_couple(string, unit="pt"):
     """Return a tuple of dimensions.
 
     :param str string: The string to parse, as "LENGTHxLENGTH" (where LENGTH
         are length). Example: ``21cm x 29.7cm``.
     :return: A tuple of :class:`decimal.Decimal`, reprenting the dimensions,
         in points.
+
+
+    TODO
     """
     try:
-        match = PAPERSIZE_COMPILED_RE.match(string).groupdict()
+        match = __PAPERSIZE_COMPILED_RE.match(string).groupdict()
         return (
-            parse_length(match['width']),
-            parse_length(match['height']),
+            parse_length(match['width'], unit),
+            parse_length(match['height'], unit),
             )
     except AttributeError:
         raise CouldNotParse(string)
 
-def parse_paper_size(string):
+def parse_papersize(string, unit="pt"):
     """Return the papersize corresponding to string.
-    """
-    if string.lower() in PAPERSIZES:
-        return parse_paper_size(PAPERSIZES[string])
-    return parse_couple(string)
 
-def isPortrait(width, height):
+    TODO
+    """
+    if string.lower() in SIZES:
+        return parse_papersize(SIZES[string], unit)
+    return parse_couple(string, unit)
+
+def is_portrait(width, height):
+    """TODO
+
+    >>> is_portrait(11, 10)
+    False
+    >>> is_portrait(10, 10)
+    True
+    >>> is_portrait(10, 11)
+    True
+    """
     return width <= height
 
-def isLandscape(width, height):
+def is_landscape(width, height):
+    """TODO
+
+    >>> is_landscape(11, 10)
+    True
+    >>> is_landscape(10, 10)
+    True
+    >>> is_landscape(10, 11)
+    False
+    """
     return height <= width
 
-def isSquare(width, height):
+def is_square(width, height):
+    """TODO
+
+    >>> is_square(11, 10)
+    False
+    >>> is_square(10, 10)
+    True
+    >>> is_square(10, 11)
+    False
+    """
     return width == height
 
-def rotate(size, portrait=True):
+def rotate(size, portrait):
+    """TODO
+
+    >>> rotate((21, 29.7), True)
+    (21, 29.7)
+    >>> rotate((21, 29.7), False)
+    (29.7, 21)
+    """
     if portrait:
         return (min(size), max(size))
     else:
