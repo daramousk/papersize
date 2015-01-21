@@ -21,6 +21,7 @@ import os
 from papersize import __version__
 
 def readme():
+    """Return content of the `README` file."""
     directory = os.path.dirname(os.path.join(
         os.getcwd(),
         __file__,
@@ -28,22 +29,27 @@ def readme():
     return open(os.path.join(directory, "README"), "r").read()
 
 setup(
-        name='Papersize',
-        version=__version__,
-        packages=find_packages(),
-        setup_requires=["hgtools"],
-        install_requires=[
-            # TODO
-            ],
-        include_package_data=True,
-        author='Louis Paternault',
-        author_email='spalax@gresille.org',
-        description='TODO',
-        #url='http://paternault.fr/informatique/prof', # TODO
-        license="GPLv3 or any later version",
-        test_suite="papersize.test.suite",
-        classifiers=[
-            # TODO
+    name='Papersize',
+    version=__version__,
+    packages=find_packages(),
+    setup_requires=["hgtools"],
+    install_requires=[
         ],
-        long_description=readme(),
+    include_package_data=True,
+    author='Louis Paternault',
+    author_email='spalax@gresille.org',
+    description='Paper size related tools',
+    #url='http://paternault.fr/informatique/prof', # TODO
+    license="GPLv3 or any later version",
+    test_suite="papersize.test.suite",
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
+        "Topic :: Printing",
+    ],
+    long_description=readme(),
 )

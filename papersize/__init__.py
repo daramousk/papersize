@@ -17,7 +17,6 @@
 from decimal import Decimal
 import os
 import re
-import subprocess
 
 __version__ = "0.0.0"
 __AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
@@ -119,6 +118,7 @@ class PapersizeException(Exception):
     pass
 
 class CouldNotParse(PapersizeException):
+    """String could not be parsed."""
     pass
 
 def convert_length(length, orig, dest):
@@ -138,7 +138,6 @@ def parse_length(string, unit="pt"):
     >>> float(parse_length("10cm"))
     284.5275591
     """
-    # TODO return value in the specified unit
     match = __SIZE_COMPILED_RE.match(string).groups()
     return convert_length(
         Decimal(match[0]),
