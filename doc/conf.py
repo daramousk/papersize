@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # PaperSize documentation build configuration file, created by
 # sphinx-quickstart on Mon Oct 20 10:09:32 2014.
@@ -35,7 +34,6 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'sphinxarg.ext',
 ]
 
 todo_include_todos = True

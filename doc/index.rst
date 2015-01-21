@@ -3,6 +3,12 @@ Welcome to `papersize`'s documentation!
 
 TODO
 
+Module documentation
+--------------------
+
+.. automodule:: papersize
+  :members:
+
 Download and install
 --------------------
 
@@ -20,11 +26,6 @@ Download and install
         .. code-block:: shell
 
             python3 setup.py install
-
-Module documentation
---------------------
-
-TODO
 
 Indices and tables
 ------------------

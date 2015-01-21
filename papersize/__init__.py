@@ -19,13 +19,12 @@ import os
 import re
 import subprocess
 
-from pdfautonup import errors
-
 VERSION = "0.0.0"
 __AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
 __COPYRIGHT__ = "(C) 2015 Louis Paternault. GNU GPL 3 or later."
+# TODO Hide every private variable
 
-PAPERSIZES = {
+SIZES = {
     # http://www.printernational.org/iso-paper-sizes.php
     "4a0": "1682mm x 2378mm",
     "2a0": "1189mm x 1682mm",
@@ -112,12 +111,20 @@ UNITS_COMPILED_RE = re.compile("^{}$".format(UNITS_RE))
 SIZE_COMPILED_RE = re.compile("^{}$".format(SIZE_RE).format("size"))
 PAPERSIZE_COMPILED_RE = re.compile(PAPERSIZE_RE.format("width", "height"))
 
-def parse_length(string):
+class PapersizeException(Exception):
+    """All exceptions of this module inherit from this one."""
+    pass
+
+class CouldNotParse(PapersizeException):
+    pass
+
+def parse_length(string, unit="pt"):
     """Return a length corresponding to the string.
 
-    :rtype: :class:`decimal.Decimal`
     :return: The length, in points.
+    :rtype: :class:`decimal.Decimal`
     """
+    # TODO return value in the specified unit
     match = SIZE_COMPILED_RE.match(string).groups()
     return decimal.Decimal(match[0]) * decimal.Decimal(UNITS[match[1]])
 
@@ -125,7 +132,7 @@ def parse_couple(string):
     """Return a tuple of dimensions.
 
     :param str string: The string to parse, as "LENGTHxLENGTH" (where LENGTH
-    are length).
+        are length). Example: ``21cm x 29.7cm``.
     :return: A tuple of :class:`decimal.Decimal`, reprenting the dimensions,
         in points.
     """
@@ -136,7 +143,7 @@ def parse_couple(string):
             parse_length(match['height']),
             )
     except AttributeError:
-        raise errors.CouldNotParse(string)
+        raise CouldNotParse(string)
 
 def parse_paper_size(string):
     """Return the papersize corresponding to string.
@@ -145,82 +152,17 @@ def parse_paper_size(string):
         return parse_paper_size(PAPERSIZES[string])
     return parse_couple(string)
 
-def parse_lc_paper(string):
-    """Parse LC_PAPER locale variable
+def isPortrait(width, height):
+    return width <= height
 
-    We assume units are milimeters.
-    """
-    dimensions = {}
-    for line in string.split('\n'):
-        if line.startswith("width="):
-            dimensions["width"] = parse_length("{}mm".format(line[6:]))
-        if line.startswith("height="):
-            dimensions["height"] = parse_length("{}mm".format(line[7:]))
-    if len(dimensions) == 2:
-        return (dimensions["width"], dimensions["height"])
-    raise errors.CouldNotParse(string)
+def isLandscape(width, height):
+    return height <= width
 
-def target_paper_size(target_size):
-    """Return the target paper size.
-
-    :param str target_size: Target size, if provided by user in command line.
-    """
-    # pylint: disable=too-many-return-statements
-
-    # Option set by user on command line
-    if target_size is not None:
-        return parse_paper_size(target_size[0])
-
-    # LC_PAPER environment variable (can be read from "locale -k LC_PAPER"
-    try:
-        return parse_lc_paper(subprocess.check_output(
-            ["locale", "-k", "LC_PAPER"],
-            universal_newlines=True,
-            ))
-    except (subprocess.CalledProcessError, errors.CouldNotParse):
-        pass
-
-    # PAPERSIZE environment variable
-    try:
-        return parse_paper_size(os.environ['PAPERSIZE'].strip())
-    except KeyError:
-        pass
-
-    # file described by the PAPERCONF environment variable
-    try:
-        return parse_paper_size(
-            open(os.environ['PAPERCONF'], 'r').read().strip()
-            )
-    except errors.CouldNotParse:
-        raise
-    except: # pylint: disable=bare-except
-        pass
-
-    # content of /etc/papersize
-    try:
-        return parse_paper_size(open('/etc/papersize', 'r').read().strip())
-    except errors.CouldNotParse:
-        raise
-    except: # pylint: disable=bare-except
-        pass
-
-    # stdout of the paperconf command
-    try:
-        return parse_paper_size(subprocess.check_output(
-            ["paperconf"],
-            universal_newlines=True,
-            ).strip())
-    except (subprocess.CalledProcessError, errors.CouldNotParse):
-        pass
-
-    # Eventually, if everything else has failed, a4
-    return parse_paper_size('a4')
-
-def isPortrait (or is_portrait):
-    TODO
-
-def isLandscape():
-    TODO
+def isSquare(width, height):
+    return width == height
 
 def rotate(size, portrait=True):
-    TODO
+    if portrait:
+        return (min(size), max(size))
+    else:
+        return (max(size), min(size))
