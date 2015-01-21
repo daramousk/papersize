@@ -33,7 +33,7 @@ setup(
         packages=find_packages(),
         setup_requires=["hgtools"],
         install_requires=[
-            TODO
+            # TODO
             ],
         include_package_data=True,
         author='Louis Paternault',
@@ -41,9 +41,9 @@ setup(
         description='TODO',
         #url='http://paternault.fr/informatique/prof', # TODO
         license="GPLv3 or any later version",
-        #test_suite="papersize.test:suite", # TODO
+        test_suite="papersize.test.suite",
         classifiers=[
-            TODO
+            # TODO
         ],
         long_description=readme(),
 )

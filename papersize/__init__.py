@@ -14,7 +14,7 @@
 
 """Paper-size related data and functions"""
 
-import decimal
+from decimal import Decimal
 import os
 import re
 import subprocess
@@ -118,6 +118,10 @@ class PapersizeException(Exception):
 class CouldNotParse(PapersizeException):
     pass
 
+def convert_length(length, orig, dest):
+    """TODO"""
+    return (Decimal(UNITS[orig]) * length) / Decimal(UNITS[dest])
+
 def parse_length(string, unit="pt"):
     """Return a length corresponding to the string.
 
@@ -126,7 +130,7 @@ def parse_length(string, unit="pt"):
     """
     # TODO return value in the specified unit
     match = SIZE_COMPILED_RE.match(string).groups()
-    return decimal.Decimal(match[0]) * decimal.Decimal(UNITS[match[1]])
+    return Decimal(match[0]) * Decimal(UNITS[match[1]])
 
 def parse_couple(string):
     """Return a tuple of dimensions.
