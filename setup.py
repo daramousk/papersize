@@ -32,7 +32,7 @@ def readme():
     return open(os.path.join(directory, "README"), "r").read()
 
 setup(
-    name='Papersize',
+    name='PaperSize',
     version=__version__,
     packages=find_packages(),
     setup_requires=["hgtools"],
