@@ -1,3 +1,6 @@
+#!/usr/bin python
+# -*- coding: utf8 -*-
+
 # Copyright 2015 Louis Paternault
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,10 +18,12 @@
 
 """Tests"""
 
+from __future__ import unicode_literals
 from decimal import Decimal
 import doctest
 import os
 import unittest
+
 
 import papersize
 
@@ -48,17 +53,31 @@ class TestParse(unittest.TestCase):
                 Decimal(result),
                 )
 
+        self.assertRaises(
+            papersize.CouldNotParse,
+            papersize.parse_length,
+            "cm"
+            )
+
     def testParseCouple(self):
         """Test :func:`papersize.parse_couple`."""
         for (args, result) in [
                 (("10cmx1mm",), (284.5275591, 2.845275591)),
                 (("10cmx1mm", "mm"), (100, 1)),
+                (("10cm 1mm", "mm"), (100, 1)),
+                (("10cm×1mm", "mm"), (100, 1)),
                 (("2pc x 3dd", "pt"), (24, 3.21)),
             ]:
             self.assertIterAlmostEqual(
                 papersize.parse_couple(*args),
                 result,
                 )
+
+        self.assertRaises(
+            papersize.CouldNotParse,
+            papersize.parse_papersize,
+            "2cmx2cm 2cm"
+            )
 
     def testParsePaperSize(self):
         """Test :func:`papersize.parse_papersize`."""
@@ -71,6 +90,12 @@ class TestParse(unittest.TestCase):
                 papersize.parse_papersize(*args),
                 result,
                 )
+
+        self.assertRaises(
+            papersize.CouldNotParse,
+            papersize.parse_papersize,
+            "Hello, world!"
+            )
 
     def testConvertLength(self):
         """Test :func:`papersize.convert_length`."""
@@ -110,6 +135,12 @@ class TestOrientation(unittest.TestCase):
         self.assertEqual(
             papersize.rotate((10, 11), False),
             (11, 10),
+            )
+
+        self.assertRaises(
+            papersize.UnknownOrientation,
+            papersize.rotate,
+            (1, 2), "portrait",
             )
 
 def suite():

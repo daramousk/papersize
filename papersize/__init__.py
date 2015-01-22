@@ -1,3 +1,6 @@
+#!/usr/bin python
+# -*- coding: utf8 -*-
+
 # Copyright Louis Paternault 2015
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,8 +15,66 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. 1
 
-"""Paper-size related data and functions"""
+"""Paper size related data and functions
 
+In this module:
+
+- the default unit is point (``pt``);
+- every numbers are returned as :class:`decimal.Decimal` objects.
+
+
+Constants
+---------
+
+.. autodata:: UNITS
+    :annotation:
+
+.. autodata:: SIZES
+    :annotation:
+
+.. autodata:: PORTRAIT
+    :annotation:
+
+.. autodata:: LANDSCAPE
+    :annotation:
+
+Unit conversion
+---------------
+
+.. autofunction:: convert_length
+
+Parsers
+-------
+
+.. autofunction:: parse_length
+
+.. autofunction:: parse_couple
+
+.. autofunction:: parse_papersize
+
+Paper orientation
+-----------------
+
+.. autofunction:: is_portrait
+
+.. autofunction:: is_landscape
+
+.. autofunction:: is_square
+
+.. autofunction:: rotate
+
+Exceptions
+----------
+
+.. autoclass:: PapersizeException
+
+.. autoclass:: CouldNotParse
+
+.. autoclass:: UnknownOrientation
+
+"""
+
+from __future__ import unicode_literals
 from decimal import Decimal
 import os
 import re
@@ -84,6 +145,12 @@ SIZES = {
     "10x14": "10in x 14in",
 
     }
+"""Dictionary of named sizes.
+
+Keys are names (e.g. ``a4``, ``letter``) and values are strings,
+human-readable, and parsable by :func:`parse_papersize` (e.g. ``21cm x
+29.7cm``).
+"""
 
 # Source: http://en.wikibooks.org/wiki/LaTeX/Lengths
 _TXT_UNITS = {
@@ -98,11 +165,30 @@ _TXT_UNITS = {
     "cc": "12.84",
     "sp": "0.000015",
     }
+
 UNITS = dict([
     (key, Decimal(value))
     for (key, value)
     in _TXT_UNITS.items()
     ])
+"""Dictionary of units.
+
+Keys are unit abbreviation (e.g. ``pt`` or ``cm``), and values are their value
+in points (e.g. ``UNITS['pt']`` is 1, ``UNITS['pc']``] is 12), as
+:class:`decimal.Decimal` objects.
+"""
+
+PORTRAIT = True
+"""Constant corresponding to the portrait orientation
+
+That is, height greater than width.
+"""
+
+LANDSCAPE = False
+"""Constant corresponding to the landscape orientation
+
+That is, width greater than height.
+"""
 
 __UNITS_RE = r"({})".format("|".join(UNITS.keys()))
 __SIZE_RE = r"([\d.]+){}".format(__UNITS_RE)
@@ -118,30 +204,70 @@ class PapersizeException(Exception):
     pass
 
 class CouldNotParse(PapersizeException):
-    """String could not be parsed."""
-    pass
+    """Raised when a string could not be parsed.
+
+    :param str string: String that could not be parsed.
+    """
+    def __init__(self, string):
+        super(CouldNotParse, self).__init__()
+        self.string = string
+
+    def __str__(self):
+        return "Could not parse string '{}'.".format(self.string)
+
+class UnknownOrientation(PapersizeException):
+    """Raised when a string could not be parsed.
+
+    :param obj string: Object wrongly provided as an orientation.
+    """
+    def __init__(self, string):
+        super(UnknownOrientation, self).__init__()
+        self.string = string
+
+    def __str__(self):
+        return (
+            "'{}' is not one of `papersize.PORTRAIT` or `papersize.LANDSCAPE`"
+            ).format(self.string)
 
 def convert_length(length, orig, dest):
-    """TODO
+    """Convert length from one unit to another.
 
+    :param decimal.Decimal length: Length to convert, as any object convertible
+        to a :class:`decimal.Decimal`.
+    :param str orig: Unit of ``length``, as a string which is a key of
+        :data:`UNITS`.
+    :param str dest: Unit in which ``length`` will be converted, as a string
+        which is a key of :data:`UNITS`.
+
+    Due to floating point arithmetic, there can be small rounding errors.
+
+    >>> convert_length(0.1, "cm", "mm")
+    Decimal('1.000000000000000055511151231')
     """
-    return (Decimal(UNITS[orig]) * length) / Decimal(UNITS[dest])
+    return (Decimal(UNITS[orig]) * Decimal(length)) / Decimal(UNITS[dest])
 
 def parse_length(string, unit="pt"):
     """Return a length corresponding to the string.
 
-    :return: The length, in points.
+    :param str string: The string to parse, as a length and a unit, for
+        instance ``10.2cm``.
+    :param str unit: The unit of the return value, as a key of :data:`UNITS`.
+    :return: The length, in an unit given by the ``unit`` argument.
     :rtype: :class:`decimal.Decimal`
 
     >>> float(parse_length("1cm", "mm"))
     10.0
+    >>> float(parse_length("1cm", "cm"))
+    1.0
     >>> float(parse_length("10cm"))
     284.5275591
     """
-    match = __SIZE_COMPILED_RE.match(string).groups()
+    match = __SIZE_COMPILED_RE.match(string)
+    if match is None:
+        raise CouldNotParse(string)
     return convert_length(
-        Decimal(match[0]),
-        match[1],
+        Decimal(match.groups()[0]),
+        match.groups()[1],
         unit,
         )
 
@@ -149,12 +275,12 @@ def parse_couple(string, unit="pt"):
     """Return a tuple of dimensions.
 
     :param str string: The string to parse, as "LENGTHxLENGTH" (where LENGTH
-        are length). Example: ``21cm x 29.7cm``.
-    :return: A tuple of :class:`decimal.Decimal`, reprenting the dimensions,
-        in points.
-
-
-    TODO
+        are length, parsable by :func:`parse_length`). Example: ``21cm x
+        29.7cm``. The separator can be ``x``, ``×`` or empty, surrounded by an
+        arbitrary number of spaces. For instance: ``2cmx3cm``, ``2cm x 3cm``,
+        ``2cm×3cm``, ``2cm 3cm``.
+    :rtype: :class:`tuple`
+    :return: A tuple of :class:`decimal.Decimal`, representing the dimensions.
     """
     try:
         match = __PAPERSIZE_COMPILED_RE.match(string).groupdict()
@@ -168,14 +294,26 @@ def parse_couple(string, unit="pt"):
 def parse_papersize(string, unit="pt"):
     """Return the papersize corresponding to string.
 
-    TODO
+    :param str string: The string to parse. It can be either a named size (as
+        keys of constant :data:`SIZES`), or a couple of lengths (that will be
+        processed by :func:`parse_couple`). The named paper sizes are case
+        insensitive.  The following strings return the same size: ``a4``,
+        ``A4``, ``21cm 29.7cm``, ``210mmx297mm``, ``21cm  ×  297mm``…
+    :param str unit: The unit of the return values.
+    :return: The paper size, as a couple of :class:`decimal.Decilam`.
+    :rtype: :class:`tuple`
     """
     if string.lower() in SIZES:
         return parse_papersize(SIZES[string], unit)
     return parse_couple(string, unit)
 
 def is_portrait(width, height):
-    """TODO
+    """Return whether paper orientation is portrait
+
+    That is, height greater or equal to width.
+
+    :param width: Width of paper, as any sortable object.
+    :param height: Height of paper, as any sortable object.
 
     >>> is_portrait(11, 10)
     False
@@ -187,7 +325,12 @@ def is_portrait(width, height):
     return width <= height
 
 def is_landscape(width, height):
-    """TODO
+    """Return whether paper orientation is landscape
+
+    That is, width greater or equal to height.
+
+    :param width: Width of paper, as any sortable object.
+    :param height: Height of paper, as any sortable object.
 
     >>> is_landscape(11, 10)
     True
@@ -199,7 +342,10 @@ def is_landscape(width, height):
     return height <= width
 
 def is_square(width, height):
-    """TODO
+    """Return whether paper is a square (width equals height).
+
+    :param width: Width of paper, as any sortable object.
+    :param height: Height of paper, as any sortable object.
 
     >>> is_square(11, 10)
     False
@@ -210,15 +356,24 @@ def is_square(width, height):
     """
     return width == height
 
-def rotate(size, portrait):
-    """TODO
+def rotate(size, orientation):
+    """Return the size, rotated if necessary to make it portrait or landscape.
 
-    >>> rotate((21, 29.7), True)
+    :param tuple size: Couple paper of dimension, as sortable objects
+        (:class:`int`, :class:`float`, :class:`decimal.Decimal`…).
+    :param orientation: Return format, one of ``PORTRAIT`` or ``LANDSCAPE``.
+    :return: The size, as a couple of dimensions, of the same type of the
+        ``size`` parameter.
+    :rtype: :class:`tuple`
+
+    >>> rotate((21, 29.7), PORTRAIT)
     (21, 29.7)
-    >>> rotate((21, 29.7), False)
+    >>> rotate((21, 29.7), LANDSCAPE)
     (29.7, 21)
     """
-    if portrait:
+    if orientation == PORTRAIT:
         return (min(size), max(size))
-    else:
+    elif orientation == LANDSCAPE:
         return (max(size), min(size))
+    else:
+        raise UnknownOrientation(orientation)
