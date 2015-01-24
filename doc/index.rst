@@ -23,7 +23,7 @@ Module documentation
 Download and install
 --------------------
 
-* Download: http://TODO/papersize-0.2.0.tar.gz.
+* Download: http://pypi.python.org/packages/source/p/papersize/papersize-0.1.0.tar.gz
 * Install (in a `virtualenv`, not to mess with your distribution installation system):
 
     * With `pip`:
