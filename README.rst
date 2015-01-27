@@ -14,17 +14,17 @@ Install
 
 This module is compatible with both python 2 and 3.
 
-* From sources:
+* From sources::
 
     python setup.py install
 
-* From pip:
+* From pip::
 
     pip install papersize
 
 Documentation
 =============
 
-You can build the documentation using:
+You can build the documentation using::
 
   cd doc && make html

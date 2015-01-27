@@ -24,12 +24,12 @@ import os
 from papersize import __version__
 
 def readme():
-    """Return content of the `README` file."""
+    """Return content of the `README.rst` file."""
     directory = os.path.dirname(os.path.join(
         os.getcwd(),
         __file__,
         ))
-    return open(os.path.join(directory, "README"), "r").read()
+    return open(os.path.join(directory, "README.rst"), "r").read()
 
 setup(
     name='PaperSize',
