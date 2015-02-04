@@ -19,7 +19,7 @@
 
 In this module:
 
-- the default unit is point (``pt``);
+- the default unit (input and output) is point (``pt``);
 - every numbers are returned as :class:`decimal.Decimal` objects.
 
 
@@ -300,7 +300,7 @@ def parse_papersize(string, unit="pt"):
         insensitive.  The following strings return the same size: ``a4``,
         ``A4``, ``21cm 29.7cm``, ``210mmx297mm``, ``21cm  ×  297mm``…
     :param str unit: The unit of the return values.
-    :return: The paper size, as a couple of :class:`decimal.Decilam`.
+    :return: The paper size, as a couple of :class:`decimal.Decimal`.
     :rtype: :class:`tuple`
     """
     if string.lower() in SIZES:

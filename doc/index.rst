@@ -12,9 +12,6 @@ This module provides tools to manipulate paper sizes, that is:
 - tools to parse paper sizes, so that you do not have to worry about the format
   of paper sizes provided by your user, it being `a4` or `21cm x 29.7cm`.
 
-.. contents::
-
-
 Module documentation
 --------------------
 
@@ -23,7 +20,7 @@ Module documentation
 Download and install
 --------------------
 
-* Download: http://pypi.python.org/packages/source/p/papersize/papersize-0.1.0.tar.gz
+* Download: `papersize-0.1.0.tar.gz <http://pypi.python.org/packages/source/p/papersize/papersize-0.1.0.tar.gz>`_
 * Install (in a `virtualenv`, not to mess with your distribution installation system):
 
     * With `pip`:
