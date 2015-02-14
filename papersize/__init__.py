@@ -255,12 +255,12 @@ def parse_length(string, unit="pt"):
     :return: The length, in an unit given by the ``unit`` argument.
     :rtype: :class:`decimal.Decimal`
 
-    >>> float(parse_length("1cm", "mm"))
-    10.0
-    >>> float(parse_length("1cm", "cm"))
-    1.0
-    >>> float(parse_length("10cm"))
-    284.5275591
+    >>> parse_length("1cm", "mm")
+    Decimal('1E+1')
+    >>> parse_length("1cm", "cm")
+    Decimal('1')
+    >>> parse_length("10cm")
+    Decimal('284.52755910')
     """
     match = __SIZE_COMPILED_RE.match(string)
     if match is None:
@@ -281,6 +281,11 @@ def parse_couple(string, unit="pt"):
         ``2cm×3cm``, ``2cm 3cm``.
     :rtype: :class:`tuple`
     :return: A tuple of :class:`decimal.Decimal`, representing the dimensions.
+
+    >>> parse_couple("1cm 10cm", "mm")
+    (Decimal('1E+1'), Decimal('1.0E+2'))
+    >>> parse_couple("1mm 10mm", "cm")
+    (Decimal('0.1'), Decimal('1.0'))
     """
     try:
         match = __PAPERSIZE_COMPILED_RE.match(string).groupdict()
@@ -302,6 +307,13 @@ def parse_papersize(string, unit="pt"):
     :param str unit: The unit of the return values.
     :return: The paper size, as a couple of :class:`decimal.Decimal`.
     :rtype: :class:`tuple`
+
+    >>> parse_papersize("A4", "cm")
+    (Decimal('21.0'), Decimal('29.7'))
+    >>> parse_papersize("21cm x 29.7cm", "mm")
+    (Decimal('2.1E+2'), Decimal('297'))
+    >>> parse_papersize("10 100")
+    (Decimal('10'), Decimal('100'))
     """
     if string.lower() in SIZES:
         return parse_papersize(SIZES[string], unit)
