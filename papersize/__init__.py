@@ -316,7 +316,7 @@ def parse_papersize(string, unit="pt"):
     (Decimal('10'), Decimal('100'))
     """
     if string.lower() in SIZES:
-        return parse_papersize(SIZES[string], unit)
+        return parse_papersize(SIZES[string.lower()], unit)
     return parse_couple(string, unit)
 
 def is_portrait(width, height):
