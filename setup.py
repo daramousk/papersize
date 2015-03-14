@@ -42,7 +42,7 @@ setup(
     author='Louis Paternault',
     author_email='spalax@gresille.org',
     description='Paper size related tools',
-    url='https://pypi.python.org/pypi/papersize',
+    url='http://git.framasoft.org/spalax/papersize',
     license="GPLv3 or any later version",
     test_suite="papersize.test.suite",
     classifiers=[
