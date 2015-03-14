@@ -1,3 +1,7 @@
+# Version 0.1.2 (2015/03/14)
+
+  - New version to solve packaging issues.
+
 # Version 0.1.1 (2015/03/14)
 
   - Bugs
