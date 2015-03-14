@@ -59,8 +59,8 @@ copyright = '2015, Louis Paternault'
 # built documents.
 #
 # The short X.Y version.
-import pkg_resources
-version = pkg_resources.require("papersize")[0].version
+from papersize import __version__
+version = __version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
