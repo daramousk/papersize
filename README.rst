@@ -49,5 +49,5 @@ The documentation is available on `readthedocs
   :target: http://pypi.python.org/pypi/papersize
 .. |license| image:: https://img.shields.io/pypi/l/PaperSize.svg
   :target: http://www.gnu.org/licenses/gpl-3.0.html
-.. |sources| image:: https://img.shields.io/badge/home-papersize-brightgreen.svg
+.. |sources| image:: https://img.shields.io/badge/sources-papersize-brightgreen.svg
   :target: http://git.framasoft.org/spalax/papersize
