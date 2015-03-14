@@ -77,10 +77,9 @@ Exceptions
 from __future__ import unicode_literals
 from decimal import Decimal
 import os
-import pkg_resources
 import re
 
-__version__ = pkg_resources.require("papersize")[0].version
+__version__ = "0.1.1"
 __AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
 __COPYRIGHT__ = "(C) 2015 Louis Paternault. GNU GPL 3 or later."
 
