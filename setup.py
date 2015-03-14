@@ -33,7 +33,7 @@ def readme():
 
 setup(
     name='PaperSize',
-    version=__version__,
+    version="0.1.0",
     packages=find_packages(),
     setup_requires=["hgtools"],
     install_requires=[
