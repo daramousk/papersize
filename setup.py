@@ -21,8 +21,6 @@
 from setuptools import setup, find_packages
 import os
 
-from papersize import __version__
-
 def readme():
     """Return content of the `README.rst` file."""
     directory = os.path.dirname(os.path.join(
