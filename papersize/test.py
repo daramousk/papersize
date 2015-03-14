@@ -149,7 +149,7 @@ def suite():
     test_loader = unittest.defaultTestLoader
     return test_loader.discover(os.path.dirname(__file__))
 
-def load_tests(__loader, tests, __pattern):
+def load_tests(dummy_loader, tests, dummy_pattern):
     """Load tests (unittests and doctests)."""
     # Loading doctests
     tests.addTests(doctest.DocTestSuite(papersize))
