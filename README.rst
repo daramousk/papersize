@@ -29,11 +29,11 @@ Test
 
 * Current python version::
 
-  python setup.py test
+    python setup.py test
 
 * All supported python versions (using `tox <http://tox.testrun.org>`_)::
 
-  tox
+    tox
 
 Documentation
 =============
