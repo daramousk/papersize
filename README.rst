@@ -17,10 +17,10 @@ Install
 
 This module is compatible with both python 2 and 3.
 
-* From sources::
+* From sources:
 
   * Download: https://pypi.python.org/pypi/papersize
-  * Install (in a `virtualenv`, if you do not want to mess with your distribution installation system)
+  * Install (in a `virtualenv`, if you do not want to mess with your distribution installation system)::
 
       python setup.py install
 
