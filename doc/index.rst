@@ -14,28 +14,16 @@ This module provides tools to manipulate paper sizes, that is:
 - tools to parse paper sizes, so that you do not have to worry about the format
   of paper sizes provided by your user, it being `a4` or `21cm x 29.7cm`.
 
+Download and install
+--------------------
+
+See the `main project page <http://git.framasoft.org/spalax/papersize>`_ for
+instructions.
+
 Module documentation
 --------------------
 
 .. automodule:: papersize
-
-Download and install
---------------------
-
-* `Download <https://pypi.python.org/pypi/papersize>`_
-* Install (in a `virtualenv`, not to mess with your distribution installation system):
-
-    * With `pip`:
-
-        .. code-block:: shell
-
-            pip install papersize
-
-    * Without `pip`: Download and unpack package, and run:
-
-        .. code-block:: shell
-
-            python3 setup.py install
 
 Indices and tables
 ------------------
