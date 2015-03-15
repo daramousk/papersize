@@ -1,4 +1,5 @@
-Paper size related tools
+PaperSize — Paper size related tools
+====================================
 
 |sources| |pypi| |documentation| |license|
 
@@ -12,7 +13,7 @@ This module provides tools to manipulate paper sizes, that is:
   of paper sizes provided by your user, it being `a4` or `21cm x 29.7cm`.
 
 Install
-=======
+-------
 
 This module is compatible with both python 2 and 3.
 
@@ -25,7 +26,7 @@ This module is compatible with both python 2 and 3.
     pip install papersize
 
 Test
-====
+----
 
 * Current python version::
 
@@ -36,7 +37,7 @@ Test
     tox
 
 Documentation
-=============
+-------------
 
 The documentation is available on `readthedocs
 <http://papersize.readthedocs.org>`_.  You can build it using::
