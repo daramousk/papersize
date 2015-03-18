@@ -22,6 +22,7 @@ Release process
   - Build: ``python setup.py sdist``
   - Documentation should build: https://readthedocs.org/builds/papersize/
   - README should be correctly rendered: https://git.framasoft.org/spalax/papersize
+  - Check that README compiles flawlessly: ``rst2html README.rst > ~/tmp/index.html`
 
 - Create a git tag::
 
