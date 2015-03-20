@@ -19,6 +19,7 @@
 """Installer"""
 
 from setuptools import setup, find_packages
+import codecs
 import os
 
 def readme():
@@ -27,7 +28,7 @@ def readme():
         os.getcwd(),
         __file__,
         ))
-    return open(os.path.join(directory, "README.rst"), "r").read()
+    return codecs.open(os.path.join(directory, "README.rst"), "r", "utf8").read()
 
 setup(
     name='PaperSize',
