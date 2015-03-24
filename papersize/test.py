@@ -29,7 +29,7 @@ import papersize
 
 class TestParse(unittest.TestCase):
     """Test parsing related functions."""
-    # pylint: disable = invalid-name, star-args
+    # pylint: disable = invalid-name
 
     def assertIterAlmostEqual(self, iter1, iter2):
         """Assert iterators of elements are almost items.
@@ -110,7 +110,7 @@ class TestParse(unittest.TestCase):
 
 class TestOrientation(unittest.TestCase):
     """Test orientation related tools."""
-    # pylint: disable = invalid-name, star-args
+    # pylint: disable = invalid-name
 
     def testPortraitLandscape(self):
         """Test portrait/landscape functions."""
