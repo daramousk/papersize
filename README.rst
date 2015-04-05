@@ -35,7 +35,7 @@ See the end of list for a (quick and dirty) Debian package.
   This requires `stdeb <https://github.com/astraw/stdeb>`_ to be installed::
 
       python setup.py --command-packages=stdeb.command bdist_deb
-      sudo dpkg -i deb_dist/python3-<VERSION>_all.deb
+      sudo dpkg -i deb_dist/python-papersize-<VERSION>_all.deb
 
 Test
 ----
