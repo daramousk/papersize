@@ -1,5 +1,2 @@
-[REPORTS]
-output-format=colorized
-
 [VARIABLES]
 dummy-variables-rgx=_|dummy
