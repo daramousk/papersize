@@ -20,8 +20,6 @@
 
 from __future__ import unicode_literals
 from decimal import Decimal
-import doctest
-import os
 import unittest
 
 
@@ -142,21 +140,3 @@ class TestOrientation(unittest.TestCase):
             papersize.rotate,
             (1, 2), "portrait",
             )
-
-def suite():
-    """Return a :class:`TestSuite` object, testing all module :mod:`papersize`.
-    """
-    test_loader = unittest.defaultTestLoader
-    return test_loader.discover(os.path.dirname(__file__))
-
-def load_tests(__loader, tests, __pattern):
-    """Load tests (unittests and doctests)."""
-    # Loading doctests
-    tests.addTests(doctest.DocTestSuite(papersize))
-
-    # Unittests are loaded by default
-
-    return tests
-
-if __name__ == "__main__":
-    unittest.TextTestRunner().run(suite())

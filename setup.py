@@ -28,12 +28,18 @@ def readme():
         os.getcwd(),
         __file__,
         ))
-    return codecs.open(os.path.join(directory, "README.rst"), "r", "utf8").read()
+    with codecs.open(
+        os.path.join(directory, "README.rst"),
+        encoding="utf8",
+        mode="r",
+        errors="replace",
+        ) as file:
+        return file.read()
 
 setup(
     name='PaperSize',
     version="0.1.2",
-    packages=find_packages(),
+    packages=find_packages(exclude=["test*"]),
     setup_requires=["hgtools"],
     install_requires=[
         ],
@@ -43,7 +49,7 @@ setup(
     description='Paper size related tools',
     url='http://git.framasoft.org/spalax/papersize',
     license="GPLv3 or any later version",
-    test_suite="papersize.test.suite",
+    test_suite="test.suite",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
