@@ -12,6 +12,12 @@ This module provides tools to manipulate paper sizes, that is:
 - tools to parse paper sizes, so that you do not have to worry about the format
   of paper sizes provided by your user, it being `a4` or `21cm x 29.7cm`.
 
+What's new?
+-----------
+
+See `changelog
+<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG>`_.
+
 Install
 -------
 
@@ -47,12 +53,6 @@ Test
 * All supported python versions (using `tox <http://tox.testrun.org>`_)::
 
     tox
-
-What's new?
------------
-
-See `changelog
-<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG>`_.
 
 Documentation
 -------------
