@@ -48,6 +48,12 @@ Test
 
     tox
 
+What's new?
+-----------
+
+See `changelog
+<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG>`_.
+
 Documentation
 -------------
 
