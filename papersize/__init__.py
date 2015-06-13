@@ -79,9 +79,9 @@ from decimal import Decimal
 import os
 import re
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
-__COPYRIGHT__ = "(C) 2015 Louis Paternault. GNU GPL 3 or later."
+__COPYRIGHT__ = "(C) 2014-2015 Louis Paternault. GNU GPL 3 or later."
 
 SIZES = {
     # http://www.printernational.org/iso-paper-sizes.php
