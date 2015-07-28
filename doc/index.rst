@@ -17,7 +17,7 @@ Download and install
 
 See the `main project page <http://git.framasoft.org/spalax/papersize>`_ for
 instructions, and `changelog
-<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG>`_.
+<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG.md>`_.
 
 Module documentation
 --------------------
