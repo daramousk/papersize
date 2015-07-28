@@ -3,13 +3,13 @@
   * Python3.5 support
   * Several minor improvements to setup, test and documentation.
 
-  -- Louis Paternault <spalax@gresille.org>
+    -- Louis Paternault <spalax@gresille.org>
 
 * python-papersize 0.1.2 (2015-03-14)
 
   - New version to solve packaging issues.
 
-  -- Louis Paternault <spalax@gresille.org>
+    -- Louis Paternault <spalax@gresille.org>
 
 * python-papersize 0.1.1 (2015-03-14)
 
@@ -30,4 +30,4 @@
 
   - First published version.
 
-  -- Louis Paternault <spalax@gresille.org>
+    -- Louis Paternault <spalax@gresille.org>
