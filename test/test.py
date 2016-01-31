@@ -40,6 +40,21 @@ class TestParse(unittest.TestCase):
         for left, right in zip(iter1, iter2):
             self.assertAlmostEqual(Decimal(left), Decimal(right))
 
+    def testExceptions(self):
+        """Test module exceptions"""
+        try:
+            papersize.parse_length("cm")
+        except papersize.CouldNotParse as error:
+            self.assertEqual(str(error), "Could not parse string 'cm'.")
+
+        try:
+            papersize.rotate((1, 2), "portrait")
+        except papersize.UnknownOrientation as error:
+            self.assertEqual(
+                str(error),
+                "'portrait' is not one of `papersize.PORTRAIT` or `papersize.LANDSCAPE`",
+                )
+
     def testParseLength(self):
         """Test :func:`papersize.parse_length`."""
         for (args, result) in [
