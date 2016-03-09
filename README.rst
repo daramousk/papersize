@@ -1,7 +1,7 @@
 PaperSize — Paper size related tools
 ====================================
 
-|sources| |build| |pypi| |documentation| |license|
+|sources| |pypi| |build| |documentation| |license|
 
 This module provides tools to manipulate paper sizes, that is:
 
