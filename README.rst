@@ -58,12 +58,12 @@ Documentation
 -------------
 
 The documentation is available on `readthedocs
-<http://papersize.readthedocs.org>`_.  You can build it using::
+<http://papersize.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
 
-.. |documentation| image:: http://readthedocs.org/projects/papersize/badge
-  :target: http://papersize.readthedocs.org
+.. |documentation| image:: http://readthedocs.io/projects/papersize/badge
+  :target: http://papersize.readthedocs.io
 .. |pypi| image:: https://img.shields.io/pypi/v/papersize.svg
   :target: http://pypi.python.org/pypi/papersize
 .. |license| image:: https://img.shields.io/pypi/l/PaperSize.svg
