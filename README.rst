@@ -62,7 +62,7 @@ The documentation is available on `readthedocs
 
   cd doc && make html
 
-.. |documentation| image:: http://readthedocs.io/projects/papersize/badge
+.. |documentation| image:: http://readthedocs.org/projects/papersize/badge
   :target: http://papersize.readthedocs.io
 .. |pypi| image:: https://img.shields.io/pypi/v/papersize.svg
   :target: http://pypi.python.org/pypi/papersize
