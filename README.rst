@@ -1,7 +1,7 @@
 PaperSize — Paper size related tools
 ====================================
 
-|sources| |pypi| |build| |documentation| |license|
+|sources| |pypi| |build| |coverage| |documentation| |license|
 
 This module provides tools to manipulate paper sizes, that is:
 
@@ -70,6 +70,8 @@ The documentation is available on `readthedocs
   :target: http://www.gnu.org/licenses/gpl-3.0.html
 .. |sources| image:: https://img.shields.io/badge/sources-papersize-brightgreen.svg
   :target: http://git.framasoft.org/spalax/papersize
+.. |coverage| image:: https://git.framasoft.org/spalax/papersize/badges/master/coverage.svg
+  :target: https://git.framasoft.org/spalax/papersize/builds
 .. |build| image:: https://git.framasoft.org/spalax/papersize/badges/master/build.svg
   :target: https://git.framasoft.org/spalax/papersize/builds
 
