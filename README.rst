@@ -15,8 +15,7 @@ This module provides tools to manipulate paper sizes, that is:
 What's new?
 -----------
 
-See `changelog
-<https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG.md>`_.
+See `changelog <https://git.framasoft.org/spalax/papersize/blob/master/CHANGELOG.md>`_.
 
 Install
 -------
@@ -57,8 +56,7 @@ Test
 Documentation
 -------------
 
-The documentation is available on `readthedocs
-<http://papersize.readthedocs.io>`_.  You can build it using::
+The documentation is available on `readthedocs <http://papersize.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
 
