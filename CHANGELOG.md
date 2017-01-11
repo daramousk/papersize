@@ -1,3 +1,9 @@
+* python-papersize 0.1.4 (unreleased)
+
+    * Add python3.6 support.
+
+    -- Louis Paternault <spalax@gresille.org>
+
 * python-papersize 0.1.3 (2015-06-13)
 
     * Python3.5 support
