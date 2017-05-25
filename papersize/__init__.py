@@ -80,7 +80,7 @@ import os
 import re
 
 __version__ = "0.1.3"
-__AUTHOR__ = "Louis Paternault (spalax@gresille.org)"
+__AUTHOR__ = "Louis Paternault (spalax+pypi@gresille.org)"
 __COPYRIGHT__ = "(C) 2014-2015 Louis Paternault. GNU GPL 3 or later."
 
 SIZES = {

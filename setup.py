@@ -45,7 +45,7 @@ setup(
         ],
     include_package_data=True,
     author='Louis Paternault',
-    author_email='spalax@gresille.org',
+    author_email='spalax+pypi@gresille.org',
     description='Paper size related tools',
     url='http://git.framasoft.org/spalax/papersize',
     license="GPLv3 or any later version",
