@@ -27,8 +27,7 @@ def load_module(module_finder, name):
     """Load and return module `name`."""
     if sys.version_info >= (3, 4, 0):
         return module_finder.find_spec(name).loader.load_module()
-    else:
-        return module_finder.find_module(name).load_module(name)
+    return module_finder.find_module(name).load_module(name)
 
 def load_tests(__loader, tests, __pattern):
     """Load tests (doctests).
