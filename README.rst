@@ -1,4 +1,4 @@
-PaperSize — Paper size related tools
+PaperSize 📏 Paper size related tools
 ====================================
 
 |sources| |pypi| |build| |coverage| |documentation| |license|
