@@ -30,6 +30,7 @@ class TestDefinition(unittest.TestCase):
     # pylint: disable = invalid-name
 
     def testValidDefinitions(self):
+        """Test that :data:`papersize.SIZES` is correctly defined."""
         for key, value in papersize.SIZES.items():
             self.assertTrue(papersize.parse_papersize(key))
             self.assertTrue(papersize.parse_papersize(value))
