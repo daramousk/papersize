@@ -1,7 +1,8 @@
 #!/usr/bin python
 # -*- coding: utf8 -*-
 
-# Copyright Louis Paternault 2015
+# Copyright Louis Paternault 2017
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -111,12 +112,16 @@ SIZES = {
     "b9": "44mm x 62mm",
     "b10": "31mm x 44mm",
 
-    # http://www.paper-sizes.com/north-american-paper-sizes/north-american-architectural-paper-sizes
-    "archA": "9in x 12in",
-    "archB": "12in x 18in",
-    "archC": "18in x 24in",
-    "archD": "24in x 36in",
-    "archE": "36in x 48in",
+    "a2extra": "445mm x 619mm",
+    "a3extra": "322mm x 445mm",
+    "a3super": "305mm x 508mm",
+    "supera3": "305mm x 487mm",
+    "a4extra": "235mm x 322mm",
+    "a4super": "229mm x 322mm",
+    "supera4": "227mm x 356mm",
+    "a4long": "210mm x 348mm",
+    "a5extra": "173mm x 235mm",
+    "sob5extra": "202mm x 276mm",
 
     # http://www.engineeringtoolbox.com/office-paper-sizes-d_213.html
     "letter": "8.5in x 11in",
@@ -126,12 +131,6 @@ SIZES = {
     "statement": "5in x 8.5in",
     "halfletter": "5in x 8.5in",
     "folio": "8in x 13in",
-
-    # http://www.paper-sizes.com/north-american-paper-sizes/north-american-loose-paper-sizes
-    "ledger": "17in x 11in",
-
-    # http://simple.wikipedia.org/wiki/Paper_size
-    "quarto": "9in x 11in",
 
     # http://hplipopensource.com/hplip-web/tech_docs/page_sizes.html
     "flsa": "8.5in x 13in",
@@ -143,6 +142,40 @@ SIZES = {
     "note": "8.5in x 11in",
     "11x17": "11in x 17in",
     "10x14": "10in x 14in",
+
+    # https://en.wikipedia.org/w/index.php?title=Paper_size&oldid=814180250
+    "c0": "917mm × 1297mm",
+    "c1": "648mm × 917mm",
+    "c2": "458mm × 648mm",
+    "c3": "324mm × 458mm",
+    "c4": "229mm × 324mm",
+    "c5": "162mm × 229mm",
+    "c6": "114mm × 162mm",
+    "c7": "81mm × 114mm",
+    "c8": "57mm × 81mm",
+    "c9": "40mm × 57mm",
+    "c10": "28mm × 40mm",
+
+    "juniorlegal": "5in × 8in",
+    "memo": "halfletter",
+    "governmentletter": "8in × 10.5in",
+    "governmentlegal": "8.5in × 13in",
+    "ledger": "17in x 11in",
+
+    "arch1": "9in x 12in",
+    "arch2": "12in x 18in",
+    "arch3": "18in x 24in",
+    "arch4": "24in x 36in",
+    "arch5": "30in x 42in",
+    "arch6": "36in x 48in",
+    "archa": "arch1",
+    "archb": "arch2",
+    "archc": "arch3",
+    "archd": "arch4",
+    "arche1": "arch5",
+    "arche": "arch6",
+    "arche2": "26in x 38in",
+    "arche3": "27in x 39in",
 
     }
 """Dictionary of named sizes.
