@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# PaperSize documentation build configuration file, created by
+# papersize documentation build configuration file, created by
 # sphinx-quickstart on Mon Oct 20 10:09:32 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -51,8 +51,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'PaperSize'
-copyright = '2014-2015, Louis Paternault'
+project = 'papersize'
+copyright = '2014-2017, Louis Paternault'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -184,7 +184,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'PaperSizedoc'
+htmlhelp_basename = 'papersizedoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -204,7 +204,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'PaperSize.tex', 'PaperSize Documentation',
+  ('index', 'papersize.tex', 'papersize Documentation',
    'Louis Paternault', 'manual'),
 ]
 
@@ -234,7 +234,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'PaperSize', 'PaperSize Documentation',
+    ('index', 'papersize', 'papersize Documentation',
      ['Louis Paternault'], 1)
 ]
 
@@ -248,8 +248,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'PaperSize', 'PaperSize Documentation',
-   'Louis Paternault', 'PaperSize', 'One line description of project.',
+  ('index', 'papersize', 'papersize Documentation',
+   'Louis Paternault', 'papersize', 'One line description of project.',
    'Miscellaneous'),
 ]
 

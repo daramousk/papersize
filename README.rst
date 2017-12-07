@@ -1,4 +1,4 @@
-PaperSize 📏 Paper size related tools
+papersize 📏 Paper size related tools
 ====================================
 
 |sources| |pypi| |build| |coverage| |documentation| |license|
@@ -64,7 +64,7 @@ The documentation is available on `readthedocs <http://papersize.readthedocs.io>
   :target: http://papersize.readthedocs.io
 .. |pypi| image:: https://img.shields.io/pypi/v/papersize.svg
   :target: http://pypi.python.org/pypi/papersize
-.. |license| image:: https://img.shields.io/pypi/l/PaperSize.svg
+.. |license| image:: https://img.shields.io/pypi/l/papersize.svg
   :target: http://www.gnu.org/licenses/gpl-3.0.html
 .. |sources| image:: https://img.shields.io/badge/sources-papersize-brightgreen.svg
   :target: http://git.framasoft.org/spalax/papersize
