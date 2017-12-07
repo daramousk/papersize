@@ -104,9 +104,9 @@ class TestParse(unittest.TestCase):
     def testParsePaperSize(self):
         """Test :func:`papersize.parse_papersize`."""
         for (args, result) in [
-                (("a4", "cm"), (21, 29.7)),
+                (("A4", "cm"), (21, 29.7)),
                 (("20cm x 1mm", "cm"), (20, 0.1)),
-                (("quarto", ), (650.43, 794.97)),
+                (("Ledger", ), (1228.59, 794.97)),
             ]:
             self.assertIterAlmostEqual(
                 papersize.parse_papersize(*args),
