@@ -1,7 +1,7 @@
 #!/usr/bin python
 # -*- coding: utf8 -*-
 
-# Copyright 2015 Louis Paternault
+# Copyright 2017 Louis Paternault
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,6 +24,15 @@ import unittest
 
 
 import papersize
+
+class TestDefinition(unittest.TestCase):
+    """Test format definitions."""
+    # pylint: disable = invalid-name
+
+    def testValidDefinitions(self):
+        for key, value in papersize.SIZES.items():
+            self.assertTrue(papersize.parse_papersize(key))
+            self.assertTrue(papersize.parse_papersize(value))
 
 class TestParse(unittest.TestCase):
     """Test parsing related functions."""
