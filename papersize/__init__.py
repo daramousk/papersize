@@ -77,7 +77,6 @@ Exceptions
 
 from __future__ import unicode_literals
 from decimal import Decimal
-import os
 import re
 
 __version__ = "1.0.0"
