@@ -1,4 +1,4 @@
-* python-papersize 0.1.4 (unreleased)
+* python-papersize 1.0.0 (2017-12-08)
 
     * Add python3.6 support.
 
