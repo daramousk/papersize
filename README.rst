@@ -1,5 +1,5 @@
 papersize 📏 Paper size related tools
-====================================
+=====================================
 
 |sources| |pypi| |build| |coverage| |documentation| |license|
 
