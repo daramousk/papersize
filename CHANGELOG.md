@@ -1,3 +1,9 @@
+* python-papersize 1.0.1 (2017-12-09)
+
+    * Fix README formatting.
+
+    -- Louis Paternault <spalax+python@gresille.org>
+
 * python-papersize 1.0.0 (2017-12-08)
 
     * Add python3.6 support.
