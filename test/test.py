@@ -32,8 +32,10 @@ class TestDefinition(unittest.TestCase):
     def testValidDefinitions(self):
         """Test that :data:`papersize.SIZES` is correctly defined."""
         for key, value in papersize.SIZES.items():
-            self.assertTrue(papersize.parse_papersize(key))
-            self.assertTrue(papersize.parse_papersize(value))
+            self.assertEqual(
+                papersize.parse_papersize(key),
+                papersize.parse_papersize(value),
+                )
 
 class TestParse(unittest.TestCase):
     """Test parsing related functions."""
