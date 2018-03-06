@@ -1,3 +1,9 @@
+* python-papersize 1.1.0 (unreleased)
+
+    * Drop python3.4 support.
+
+    -- Louis Paternault <spalax+python@gresille.org>
+
 * python-papersize 1.0.1 (2017-12-09)
 
     * Fix README formatting.
