@@ -22,35 +22,33 @@ from setuptools import setup, find_packages
 import codecs
 import os
 
+
 def readme():
     """Return content of the `README.rst` file."""
-    directory = os.path.dirname(os.path.join(
-        os.getcwd(),
-        __file__,
-        ))
+    directory = os.path.dirname(os.path.join(os.getcwd(), __file__))
     with codecs.open(
         os.path.join(directory, "README.rst"),
         encoding="utf8",
         mode="r",
         errors="replace",
-        ) as file:
+    ) as file:
         return file.read()
 
+
 setup(
-    name='papersize',
+    name="papersize",
     version="1.0.1",
     packages=find_packages(exclude=["test*"]),
     setup_requires=["hgtools"],
-    install_requires=[
-        ],
+    install_requires=[],
     include_package_data=True,
-    author='Louis Paternault',
-    author_email='spalax+python@gresille.org',
-    description='Paper size related tools',
-    url='http://git.framasoft.org/spalax/papersize',
+    author="Louis Paternault",
+    author_email="spalax+python@gresille.org",
+    description="Paper size related tools",
+    url="http://git.framasoft.org/spalax/papersize",
     license="GPLv3 or any later version",
     test_suite="test.suite",
-    keywords = "paper size standard",
+    keywords="paper size standard",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
@@ -66,5 +64,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     long_description=readme(),
-    zip_safe = True,
+    zip_safe=True,
 )

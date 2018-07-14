@@ -25,20 +25,23 @@ import unittest
 
 import papersize
 
+
 class TestDefinition(unittest.TestCase):
     """Test format definitions."""
+
     # pylint: disable = invalid-name
 
     def testValidDefinitions(self):
         """Test that :data:`papersize.SIZES` is correctly defined."""
         for key, value in papersize.SIZES.items():
             self.assertEqual(
-                papersize.parse_papersize(key),
-                papersize.parse_papersize(value),
-                )
+                papersize.parse_papersize(key), papersize.parse_papersize(value)
+            )
+
 
 class TestParse(unittest.TestCase):
     """Test parsing related functions."""
+
     # pylint: disable = invalid-name
 
     def assertIterAlmostEqual(self, iter1, iter2):
@@ -47,7 +50,6 @@ class TestParse(unittest.TestCase):
         Both arguments are expected to be iterators of the same size, and
         iterators with the same indexes are checked to be almost equal.
         """
-
 
         for left, right in zip(iter1, iter2):
             self.assertAlmostEqual(Decimal(left), Decimal(right))
@@ -65,76 +67,52 @@ class TestParse(unittest.TestCase):
             self.assertEqual(
                 str(error),
                 "'portrait' is not one of `papersize.PORTRAIT` or `papersize.LANDSCAPE`",
-                )
+            )
 
     def testParseLength(self):
         """Test :func:`papersize.parse_length`."""
-        for (args, result) in [
-                (("10cm", "mm"), 100),
-                (("10in",), 722.7),
-            ]:
-            self.assertAlmostEqual(
-                papersize.parse_length(*args),
-                Decimal(result),
-                )
+        for (args, result) in [(("10cm", "mm"), 100), (("10in",), 722.7)]:
+            self.assertAlmostEqual(papersize.parse_length(*args), Decimal(result))
 
-        self.assertRaises(
-            papersize.CouldNotParse,
-            papersize.parse_length,
-            "cm"
-            )
+        self.assertRaises(papersize.CouldNotParse, papersize.parse_length, "cm")
 
     def testParseCouple(self):
         """Test :func:`papersize.parse_couple`."""
         for (args, result) in [
-                (("10cmx1mm",), (284.5275591, 2.845275591)),
-                (("10cmx1mm", "mm"), (100, 1)),
-                (("10cm 1mm", "mm"), (100, 1)),
-                (("10cm×1mm", "mm"), (100, 1)),
-                (("2pc x 3dd", "pt"), (24, 3.21)),
-            ]:
-            self.assertIterAlmostEqual(
-                papersize.parse_couple(*args),
-                result,
-                )
+            (("10cmx1mm",), (284.5275591, 2.845275591)),
+            (("10cmx1mm", "mm"), (100, 1)),
+            (("10cm 1mm", "mm"), (100, 1)),
+            (("10cm×1mm", "mm"), (100, 1)),
+            (("2pc x 3dd", "pt"), (24, 3.21)),
+        ]:
+            self.assertIterAlmostEqual(papersize.parse_couple(*args), result)
 
         self.assertRaises(
-            papersize.CouldNotParse,
-            papersize.parse_papersize,
-            "2cmx2cm 2cm"
-            )
+            papersize.CouldNotParse, papersize.parse_papersize, "2cmx2cm 2cm"
+        )
 
     def testParsePaperSize(self):
         """Test :func:`papersize.parse_papersize`."""
         for (args, result) in [
-                (("A4", "cm"), (21, 29.7)),
-                (("20cm x 1mm", "cm"), (20, 0.1)),
-                (("Ledger", ), (1228.59, 794.97)),
-            ]:
-            self.assertIterAlmostEqual(
-                papersize.parse_papersize(*args),
-                result,
-                )
+            (("A4", "cm"), (21, 29.7)),
+            (("20cm x 1mm", "cm"), (20, 0.1)),
+            (("Ledger",), (1228.59, 794.97)),
+        ]:
+            self.assertIterAlmostEqual(papersize.parse_papersize(*args), result)
 
         self.assertRaises(
-            papersize.CouldNotParse,
-            papersize.parse_papersize,
-            "Hello, world!"
-            )
+            papersize.CouldNotParse, papersize.parse_papersize, "Hello, world!"
+        )
 
     def testConvertLength(self):
         """Test :func:`papersize.convert_length`."""
-        for (args, result) in [
-                ((10, "cm", "mm"), 100),
-                ((1, "mm", "pt"), 2.845275591),
-            ]:
-            self.assertAlmostEqual(
-                papersize.convert_length(*args),
-                Decimal(result),
-                )
+        for (args, result) in [((10, "cm", "mm"), 100), ((1, "mm", "pt"), 2.845275591)]:
+            self.assertAlmostEqual(papersize.convert_length(*args), Decimal(result))
+
 
 class TestOrientation(unittest.TestCase):
     """Test orientation related tools."""
+
     # pylint: disable = invalid-name
 
     def testPortraitLandscape(self):
@@ -153,17 +131,9 @@ class TestOrientation(unittest.TestCase):
 
     def testRotate(self):
         """Test :func:`papersize.rotate` function."""
-        self.assertEqual(
-            papersize.rotate((10, 11), True),
-            (10, 11),
-            )
-        self.assertEqual(
-            papersize.rotate((10, 11), False),
-            (11, 10),
-            )
+        self.assertEqual(papersize.rotate((10, 11), True), (10, 11))
+        self.assertEqual(papersize.rotate((10, 11), False), (11, 10))
 
         self.assertRaises(
-            papersize.UnknownOrientation,
-            papersize.rotate,
-            (1, 2), "portrait",
-            )
+            papersize.UnknownOrientation, papersize.rotate, (1, 2), "portrait"
+        )

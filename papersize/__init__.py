@@ -98,7 +98,6 @@ SIZES = {
     "a8": "52mm x 74mm",
     "a9": "37mm x 52mm",
     "a10": "26mm x 37mm",
-
     "b0": "1000mm x 1414mm",
     "b1": "707mm x 1000mm",
     "b2": "500mm x 707mm",
@@ -110,7 +109,6 @@ SIZES = {
     "b8": "62mm x 88mm",
     "b9": "44mm x 62mm",
     "b10": "31mm x 44mm",
-
     "a2extra": "445mm x 619mm",
     "a3extra": "322mm x 445mm",
     "a3super": "305mm x 508mm",
@@ -121,7 +119,6 @@ SIZES = {
     "a4long": "210mm x 348mm",
     "a5extra": "173mm x 235mm",
     "sob5extra": "202mm x 276mm",
-
     # http://www.engineeringtoolbox.com/office-paper-sizes-d_213.html
     "letter": "8.5in x 11in",
     "legal": "8.5in x 14in",
@@ -130,18 +127,14 @@ SIZES = {
     "statement": "5in x 8.5in",
     "halfletter": "5in x 8.5in",
     "folio": "8in x 13in",
-
     # http://hplipopensource.com/hplip-web/tech_docs/page_sizes.html
     "flsa": "8.5in x 13in",
-
     # http://www.coding-guidelines.com/numbers/ndb/units/area.txt
     "flse": "8.5in x 13in",
-
     # http://jexcelapi.sourceforge.net/resources/javadocs/2_6_10/docs/jxl/format/PaperSize.html
     "note": "8.5in x 11in",
     "11x17": "11in x 17in",
     "10x14": "10in x 14in",
-
     # https://en.wikipedia.org/w/index.php?title=Paper_size&oldid=814180250
     "c0": "917mm × 1297mm",
     "c1": "648mm × 917mm",
@@ -154,13 +147,11 @@ SIZES = {
     "c8": "57mm × 81mm",
     "c9": "40mm × 57mm",
     "c10": "28mm × 40mm",
-
     "juniorlegal": "5in × 8in",
     "memo": "halfletter",
     "governmentletter": "8in × 10.5in",
     "governmentlegal": "8.5in × 13in",
     "ledger": "17in x 11in",
-
     "arch1": "9in x 12in",
     "arch2": "12in x 18in",
     "arch3": "18in x 24in",
@@ -175,8 +166,7 @@ SIZES = {
     "arche": "arch6",
     "arche2": "26in x 38in",
     "arche3": "27in x 39in",
-
-    }
+}
 """Dictionary of named sizes.
 
 Keys are names (e.g. ``a4``, ``letter``) and values are strings,
@@ -186,7 +176,7 @@ human-readable, and parsable by :func:`parse_papersize` (e.g. ``21cm x
 
 # Source: http://en.wikibooks.org/wiki/LaTeX/Lengths
 _TXT_UNITS = {
-    "": "1", # Default is point (pt)
+    "": "1",  # Default is point (pt)
     "pt": "1",
     "mm": "2.845275591",
     "cm": "28.45275591",
@@ -196,13 +186,9 @@ _TXT_UNITS = {
     "dd": "1.07",
     "cc": "12.84",
     "sp": "0.000015",
-    }
+}
 
-UNITS = dict([
-    (key, Decimal(value))
-    for (key, value)
-    in _TXT_UNITS.items()
-    ])
+UNITS = dict([(key, Decimal(value)) for (key, value) in _TXT_UNITS.items()])
 """Dictionary of units.
 
 Keys are unit abbreviation (e.g. ``pt`` or ``cm``), and values are their value
@@ -226,20 +212,24 @@ __UNITS_RE = r"({})".format("|".join(UNITS.keys()))
 __SIZE_RE = r"([\d.]+){}".format(__UNITS_RE)
 __PAPERSIZE_RE = r"^(?P<width>{size}) *[x× ]? *(?P<height>{size})$".format(
     size=__SIZE_RE
-    )
+)
 
 __SIZE_COMPILED_RE = re.compile("^{}$".format(__SIZE_RE).format("size"))
 __PAPERSIZE_COMPILED_RE = re.compile(__PAPERSIZE_RE.format("width", "height"))
 
+
 class PapersizeException(Exception):
     """All exceptions of this module inherit from this one."""
+
     pass
+
 
 class CouldNotParse(PapersizeException):
     """Raised when a string could not be parsed.
 
     :param str string: String that could not be parsed.
     """
+
     def __init__(self, string):
         super(CouldNotParse, self).__init__()
         self.string = string
@@ -247,11 +237,13 @@ class CouldNotParse(PapersizeException):
     def __str__(self):
         return "Could not parse string '{}'.".format(self.string)
 
+
 class UnknownOrientation(PapersizeException):
     """Raised when a string could not be parsed.
 
     :param obj string: Object wrongly provided as an orientation.
     """
+
     def __init__(self, string):
         super(UnknownOrientation, self).__init__()
         self.string = string
@@ -259,7 +251,8 @@ class UnknownOrientation(PapersizeException):
     def __str__(self):
         return (
             "'{}' is not one of `papersize.PORTRAIT` or `papersize.LANDSCAPE`"
-            ).format(self.string)
+        ).format(self.string)
+
 
 def convert_length(length, orig, dest):
     """Convert length from one unit to another.
@@ -277,6 +270,7 @@ def convert_length(length, orig, dest):
     Decimal('1.000000000000000055511151231')
     """
     return (Decimal(UNITS[orig]) * Decimal(length)) / Decimal(UNITS[dest])
+
 
 def parse_length(string, unit="pt"):
     """Return a length corresponding to the string.
@@ -297,11 +291,8 @@ def parse_length(string, unit="pt"):
     match = __SIZE_COMPILED_RE.match(string)
     if match is None:
         raise CouldNotParse(string)
-    return convert_length(
-        Decimal(match.groups()[0]),
-        match.groups()[1],
-        unit,
-        )
+    return convert_length(Decimal(match.groups()[0]), match.groups()[1], unit)
+
 
 def parse_couple(string, unit="pt"):
     """Return a tuple of dimensions.
@@ -321,12 +312,10 @@ def parse_couple(string, unit="pt"):
     """
     try:
         match = __PAPERSIZE_COMPILED_RE.match(string).groupdict()
-        return (
-            parse_length(match['width'], unit),
-            parse_length(match['height'], unit),
-            )
+        return (parse_length(match["width"], unit), parse_length(match["height"], unit))
     except AttributeError:
         raise CouldNotParse(string)
+
 
 def parse_papersize(string, unit="pt"):
     """Return the papersize corresponding to string.
@@ -351,6 +340,7 @@ def parse_papersize(string, unit="pt"):
         return parse_papersize(SIZES[string.lower()], unit)
     return parse_couple(string, unit)
 
+
 def is_portrait(width, height):
     """Return whether paper orientation is portrait
 
@@ -367,6 +357,7 @@ def is_portrait(width, height):
     True
     """
     return width <= height
+
 
 def is_landscape(width, height):
     """Return whether paper orientation is landscape
@@ -385,6 +376,7 @@ def is_landscape(width, height):
     """
     return height <= width
 
+
 def is_square(width, height):
     """Return whether paper is a square (width equals height).
 
@@ -399,6 +391,7 @@ def is_square(width, height):
     False
     """
     return width == height
+
 
 def rotate(size, orientation):
     """Return the size, rotated if necessary to make it portrait or landscape.
