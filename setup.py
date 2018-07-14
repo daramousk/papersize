@@ -46,6 +46,11 @@ setup(
     author_email="spalax+python@gresille.org",
     description="Paper size related tools",
     url="http://git.framasoft.org/spalax/papersize",
+    project_urls={
+        "Documentation": "http://papersize.readthedocs.io",
+        "Source": "https://framagit.org/spalax/papersize",
+        "Tracker": "https://framagit.org/spalax/papersize/issues",
+    },
     license="GPLv3 or any later version",
     test_suite="test.suite",
     keywords="paper size standard",
