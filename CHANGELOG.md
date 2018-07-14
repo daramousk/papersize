@@ -1,6 +1,7 @@
 * python-papersize 1.1.0 (unreleased)
 
     * Drop python3.4 support.
+    * Add python3.7 support.
 
     -- Louis Paternault <spalax+python@gresille.org>
 
