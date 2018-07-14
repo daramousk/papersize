@@ -1,8 +1,6 @@
 papersize 📏 Paper size related tools
 =====================================
 
-|sources| |pypi| |build| |coverage| |documentation| |license|
-
     **Note:** It's 2018, and this project is still maintained: I has very few updates, because it *just works*, but I use it daily.
 
 This module provides tools to manipulate paper sizes, that is:
@@ -61,17 +59,3 @@ Documentation
 The documentation is available on `readthedocs <http://papersize.readthedocs.io>`_.  You can build it using::
 
   cd doc && make html
-
-.. |documentation| image:: http://readthedocs.org/projects/papersize/badge
-  :target: http://papersize.readthedocs.io
-.. |pypi| image:: https://img.shields.io/pypi/v/papersize.svg
-  :target: http://pypi.python.org/pypi/papersize
-.. |license| image:: https://img.shields.io/pypi/l/papersize.svg
-  :target: http://www.gnu.org/licenses/gpl-3.0.html
-.. |sources| image:: https://img.shields.io/badge/sources-papersize-brightgreen.svg
-  :target: http://git.framasoft.org/spalax/papersize
-.. |coverage| image:: https://git.framasoft.org/spalax/papersize/badges/master/coverage.svg
-  :target: https://git.framasoft.org/spalax/papersize/builds
-.. |build| image:: https://git.framasoft.org/spalax/papersize/badges/master/build.svg
-  :target: https://git.framasoft.org/spalax/papersize/builds
-
