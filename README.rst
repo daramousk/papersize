@@ -1,8 +1,6 @@
 papersize 📏 Paper size related tools
 =====================================
 
-    **Note:** It's 2018, and this project is still maintained: I has very few updates, because it *just works*, but I use it daily.
-
 This module provides tools to manipulate paper sizes, that is:
 
 - a dictionary of several named standard names (e.g. A4, letter) , with their
