@@ -410,7 +410,6 @@ def rotate(size, orientation):
     """
     if orientation == PORTRAIT:
         return (min(size), max(size))
-    elif orientation == LANDSCAPE:
+    if orientation == LANDSCAPE:
         return (max(size), min(size))
-    else:
-        raise UnknownOrientation(orientation)
+    raise UnknownOrientation(orientation)
