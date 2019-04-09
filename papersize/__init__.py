@@ -221,8 +221,6 @@ __PAPERSIZE_COMPILED_RE = re.compile(__PAPERSIZE_RE.format("width", "height"))
 class PapersizeException(Exception):
     """All exceptions of this module inherit from this one."""
 
-    pass
-
 
 class CouldNotParse(PapersizeException):
     """Raised when a string could not be parsed.
